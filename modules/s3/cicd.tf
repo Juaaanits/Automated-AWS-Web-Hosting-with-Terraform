@@ -52,7 +52,8 @@ resource "aws_iam_role_policy" "codepipeline" {
           "s3:GetObjectVersion",
           "s3:GetBucketVersioning",
           "s3:PutObjectAcl",
-          "s3:PutObject"
+          "s3:PutObject",
+          "s3:ListBucket"
         ]
         Resource = [
           aws_s3_bucket.codepipeline_artifacts.arn,
@@ -119,7 +120,8 @@ resource "aws_iam_role_policy" "codebuild" {
           "s3:GetObject",
           "s3:GetObjectVersion",
           "s3:PutObject",
-          "s3:DeleteObject"
+          "s3:DeleteObject",
+          "s3:ListBucket"
         ]
         Resource = [
           aws_s3_bucket.codepipeline_artifacts.arn,
@@ -137,7 +139,7 @@ resource "aws_iam_role_policy" "codebuild" {
   })
 }
 
-# CodeBuild project — syncs files to S3 and clears CloudFront cache
+# CodeBuild project ï¿½ syncs files to S3 and clears CloudFront cache
 resource "aws_codebuild_project" "website" {
   name          = "${var.project_name}-deploy"
   service_role  = aws_iam_role.codebuild.arn
@@ -168,7 +170,7 @@ resource "aws_codebuild_project" "website" {
     buildspec = <<-EOT
       version: 0.2
       phases:
-        deploy:
+        build:
           commands:
             - echo Deploying to S3...
             - aws s3 sync . s3://$S3_BUCKET --delete --exclude "*.tf" --exclude ".terraform/*" --exclude "*.tfstate*" --exclude "modules/*" --exclude "environments/*" --exclude ".git/*"
@@ -197,7 +199,7 @@ resource "aws_codepipeline" "website" {
     type     = "S3"
   }
 
-  # Stage 1 — Pull from GitHub
+  # Stage 1 ï¿½ Pull from GitHub
   stage {
     name = "Source"
     action {
@@ -216,7 +218,7 @@ resource "aws_codepipeline" "website" {
     }
   }
 
-  # Stage 2 — Deploy to S3 and invalidate CloudFront
+  # Stage 2 ï¿½ Deploy to S3 and invalidate CloudFront
   stage {
     name = "Deploy"
     action {
@@ -233,3 +235,5 @@ resource "aws_codepipeline" "website" {
     }
   }
 }
+
+
