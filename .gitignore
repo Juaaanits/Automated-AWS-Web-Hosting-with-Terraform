@@ -1,0 +1,19 @@
+# Terraform downloads providers into .terraform/ folder
+# It's huge and auto-generated — no need to commit it
+.terraform/
+
+# These files contain your live infrastructure state
+# They can contain sensitive data like passwords and keys
+*.tfstate
+*.tfstate.backup
+
+# Your secrets file — NEVER commit this
+*.tfvars
+
+# Lock file can be committed but optional for now
+.terraform.lock.hcl
+
+# Environment variables file
+.env
+
+/README.md
