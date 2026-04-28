@@ -214,6 +214,7 @@ resource "aws_codepipeline" "website" {
         ConnectionArn    = aws_codestarconnections_connection.github.arn
         FullRepositoryId = "${var.github_repo_owner}/${var.github_repo_name}"
         BranchName       = var.branch_name
+        DetectChanges    = "true"
       }
     }
   }
