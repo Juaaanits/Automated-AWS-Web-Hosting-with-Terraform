@@ -8,25 +8,6 @@
 
 ## 🏗️ Architecture
 
-```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Route 53      │    │   CloudFront     │    │      S3         │
-│  (DNS Records)  │───▶│ (CDN + SSL/TLS) │───▶│ (Static Files)  │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-                              │
-                              ▼
-                       ┌──────────────────┐
-                       │   ACM (SSL)      │
-                       │  (us-east-1)     │
-                       └──────────────────┘
-                              │
-                              ▼
-                ┌─────────────────────────────┐
-                │   CodePipeline + CodeBuild   │
-                │   (CI/CD Auto-Deploy)        │
-                └─────────────────────────────┘
-```
-
 ![Architecture](STATIC_WEBSITE_ARCHITECTURE.png)
 
 
