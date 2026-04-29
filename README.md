@@ -27,6 +27,10 @@
                 └─────────────────────────────┘
 ```
 
+![Architecture](STATIC_WEBSITE_ARCHITECTURE.png)
+
+
+
 **How it works:** Every push to the `main` branch triggers CodePipeline, which pulls the latest code from GitHub, syncs static files to S3 via CodeBuild, and automatically invalidates the CloudFront cache so visitors always see the latest version — all without any manual intervention.
 
 ---
