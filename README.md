@@ -8,7 +8,9 @@
 
 ## 🏗️ Architecture
 
-![Architecture](STATIC_WEBSITE_ARCHITECTURE.png)
+<p align="center">
+  <img src="STATIC_WEBSITE_ARCHITECTURE.png" width="700"/>
+</p>
 
 
 
